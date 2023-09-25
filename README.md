@@ -4,6 +4,6 @@ When played, the game "crashes" after 800 milliseconds, and runs an expanded ver
 
 ---
 
-Deletion
+### Deletion
 1. Run Task Scheduler and delete the "HostDriverSCJE" and "shokam" tasks
 2. Run Task Manager and locate the "Microsoft ® Windows Based Script Host" task
